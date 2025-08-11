@@ -100,7 +100,7 @@ MiscSection:NewToggle("Anti Stun", "Remove Disable,Heart,Hobby,Chilly,Candy,Holl
         getgenv().antistun = bool
         while getgenv().antistun do wait()
             pcall(function()
-                local hoangashdeptrai = game.Players.LocalPlayer.Character
+                local Quangdeptrai = game.Players.LocalPlayer.Character
     repeat
     Quangdeptrai["DF_Disabled"].Value = false
     Quangdeptrai.HeartStolen.Value = true
