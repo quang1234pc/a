@@ -1,3 +1,17 @@
+print("AntiAfk Activated")
+local VirtualUser=game:service'VirtualUser'
+repeat
+wait()
+until game:GetService("Players").LocalPlayer ~= nil and game:GetService("Players").LocalPlayer.Idled ~= nil
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+VirtualUser:CaptureController()
+VirtualUser:ClickButton2(Vector2.new())
+end)
+_G.WhiteListed = true
+if _G.WhiteListed then
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("LOVE HUB | MADE BY QUANGDZ", "DarkTheme", colors)
+
 local Tab = Window:NewTab("Underrated Farm")
 local Tab2 = Window:NewTab("Teleport/Server")
 local Tab3 = Window:NewTab("Players/Kill")
@@ -7,6 +21,8 @@ local Tab6 = Window:NewTab("Auto Skill")
 local Tab7 = Window:NewTab("Sam/Fruit")
 local Tab8 = Window:NewTab("Drinks/Farming Stats")
 local Tab9 = Window:NewTab("Misc")
+
+
 
 local SkillSection = Tab6:NewSection("Auto Skill Devil Fruit 1")
 local SkillSection2 = Tab6:NewSection("Auto SKill Devil Fruit 2")
@@ -103,27 +119,27 @@ MiscSection:NewToggle("Anti Stun", "Remove Disable,Heart,Hobby,Chilly,Candy,Holl
             pcall(function()
                 local hoangashdeptrai = game.Players.LocalPlayer.Character
     repeat
-    Quangdeptrai["DF_Disabled"].Value = false
-    Quangdeptrai.HeartStolen.Value = true
-    Quangdeptrai.Returned.Value = false
-    Quangdeptrai.Hobbied.Value = false
-    Quangdeptrai.HMS.Value = false
-    Quangdeptrai.ChillyPunched.Value = false
-    Quangdeptrai.CandyTouched.Value = false
-    Quangdeptrai.Negative.Value = false
-    Quangdeptrai.OpeSevered.Value = false
-    Quangdeptrai.SnowTouched.Value = false
-    Quangdeptrai.RumbleStun.Value = false
-    Quangdeptrai.GravityCrushed.Value = false
+    hoangashdeptrai["DF_Disabled"].Value = false
+    hoangashdeptrai.HeartStolen.Value = true
+    hoangashdeptrai.Returned.Value = false
+    hoangashdeptrai.Hobbied.Value = false
+    hoangashdeptrai.HMS.Value = false
+    hoangashdeptrai.ChillyPunched.Value = false
+    hoangashdeptrai.CandyTouched.Value = false
+    hoangashdeptrai.Negative.Value = false
+    hoangashdeptrai.OpeSevered.Value = false
+    hoangashdeptrai.SnowTouched.Value = false
+    hoangashdeptrai.RumbleStun.Value = false
+    hoangashdeptrai.GravityCrushed.Value = false
     wait(0.06)
-    until Quangdeptrai.Humanoid.Health == 0
+    until hoangashdeptrai.Humanoid.Health == 0
     end)
     end
     end)
 
 MiscSection:NewButton("Anti-staff", "Kicks if a staff is in server or joins server", function()
 local Pedo = {
-    1135910299,520944,43247021,2350183594,2797118575
+    1135910299,520944,43247021,2350183594
 }
 
 for _, v in pairs(game:GetService("Players"):GetPlayers()) do
@@ -1693,4 +1709,4 @@ ColorSection:NewColorPicker(theme, "Change your "..theme, color, function(color3
 Library:ChangeColor(theme, color3)
 end)
 end
-end
+end   
