@@ -39,6 +39,7 @@ local FFarmingSection3 = Tab5:NewSection("Mob Bring")
 local KPSection = Tab3:NewSection("Players")
 local KPSection2 = Tab3:NewSection("Quake Fruit")
 local KPSection3 = Tab3:NewSection("Light Fruit")
+local KPSection4 = Tab3:NewSection("God player")
 local MiscSection = Tab9:NewSection("Random Stuff")
 local WeaponSection1 = Tab4:NewSection("Yoru")
 local WeaponSection2 = Tab4:NewSection("Seastone Cestus")
@@ -372,6 +373,49 @@ else
     _G.AutoQuake = false
 end
 end)
+
+KPSection4:NewToggle("God player" , "Kills Player", function(state)
+if state then
+_G.AutoGod = true
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+-- Main configuration
+local CONFIG = {
+    speed = 16,
+    jumpPower = 50,
+    maxHealth = 100,
+    respawnTime = 5,
+}
+
+-- Event connections
+local remotes = ReplicatedStorage:WaitForChild("Remotes")
+local damageEvent = remotes:WaitForChild("DamageEvent")
+local healEvent = remotes:WaitForChild("HealEvent")
+
+-- Player handling
+local function setupPlayer(player)
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+    
+    humanoid.WalkSpeed = CONFIG.speed
+    humanoid.JumpPower = CONFIG.jumpPower
+    humanoid.MaxHealth = CONFIG.maxHealth
+    humanoid.Health = CONFIG.maxHealth
+    
+    -- Setup damage handling
+    damageEvent.OnServerEvent:Connect(function(playerWhoFired, targetPlayer, damageAmount)
+        if playerWhoFired ~= player then return end
+        if not targetPlayer or not targetPlayer.Character then return end
+        
+        local targetHumanoid = targetPlayer.Character:FindFirstChild("Humanoid")
+        if targetHumanoid then
+            targetHumanoid.Health = math.max(0, targetHumanoid.Health - damageAmount)
+        end
+    end)
+end
+
 ----------------------------------- FruitFarming
 FFarmingSection2:NewToggle("Quake Farm" , "Kills every NPCS", function(state)  --Quake
 if state then
