@@ -377,9 +377,6 @@ end)
 KPSection4:NewToggle("God player" , "Kills Player", function(state)
 if state then
 _G.AutoGod = true
--- Deobfuscated with MoonSec V3 Deobfuscator Tool
--- Original script had 1 lines and 131072 characters
-
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local Lighting = game:GetService("Lighting")
@@ -507,8 +504,6 @@ RunService.Heartbeat:Connect(function(deltaTime)
     end
 end)
 
--- Extra note: Some weapon system functions couldn't be fully deobfuscated
--- Original code had additional logic in lines 0-0
 ----------------------------------- FruitFarming
 FFarmingSection2:NewToggle("Quake Farm" , "Kills every NPCS", function(state)  --Quake
 if state then
