@@ -54,47 +54,69 @@ table.insert(PLRS,v.Name)
 end
 
 ----------------------------------- god Mode
-local godModeConnection = nil
-local godModeEnabled = false
+getgenv().GodModeEnabled = false
+local healthConnection = nil
 
-local function enableGodMode()
-    local char = game.Players.LocalPlayer.Character
-    if char and char:FindFirstChild("Humanoid") then
-        local hum = char.Humanoid
-        if godModeConnection then
-            godModeConnection:Disconnect()
-            godModeConnection = nil
-        end
-        godModeConnection = hum:GetPropertyChangedSignal("Health"):Connect(function()
-            if hum.Health < hum.MaxHealth then
-                hum.Health = hum.MaxHealth
-            end
-        end)
-        hum:SetStateEnabled(Enum.HumanoidStateType.Dead, false)
-        godModeEnabled = true
+-- local on/off God Mode
+local function toggleGodMode(state)
+    getgenv().GodModeEnabled = state
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid", 5)
+
+  if not humanoid then
+        warn("Không tìm thấy Humanoid!")
+        return
     end
-end
 
-local function disableGodMode()
-    local char = game.Players.LocalPlayer.Character
-    if char and char:FindFirstChild("Humanoid") then
-        local hum = char.Humanoid
-        if godModeConnection then
-            godModeConnection:Disconnect()
-            godModeConnection = nil
+  if state then
+        -- Bật God Mode
+        humanoid.MaxHealth = math.huge
+        humanoid.Health = math.huge
+    if not healthConnection then
+            healthConnection = humanoid:GetPropertyChangedSignal("Health"):Connect(function()
+                if humanoid.Health < math.huge then
+                    humanoid.Health = math.huge
+                end
+            end)
         end
-        hum:SetStateEnabled(Enum.HumanoidStateType.Dead, true)
-        godModeEnabled = false
-    end
-end
-
-godModeSection:NewToggle("Enable God Mode", "no dame, God", function(state)
-    if state then
-        enableGodMode()
+        humanoid:SetStateEnabled(Enum.HumanoidStateType.Dead, false)
+        humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, false)
+        humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown, false)
+        humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding, false
     else
-        disableGodMode()
+        -- off God Mode
+        humanoid.MaxHealth = 100
+        humanoid.Health = 100
+        if healthConnection then
+            healthConnection:Disconnect()
+            healthConnection = nil
+        end
+        humanoid:SetStateEnabled(Enum.HumanoidStateType.Dead, true)
+        humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, true)
+        humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown, true)
+        humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding, true)
     end
-end)    
+end
+
+godModSection:NewToggle("God Mode", "Bật/tắt God Mode", function(state)
+    toggleGodMode(state)
+end)
+
+-- Xử lý khi nhân vật respawn (áp dụng lại God Mode nếu đang bật)
+game.Players.LocalPlayer.CharacterAdded:Connect(function(character)
+    if getgenv().GodModeEnabled then
+        wait(0.1)  -- Đợi ngắn để nhân vật ổn định, giảm lag
+        toggleGodMode(true)
+    end
+end)
+
+game.Players.LocalPlayer.CharacterRemoving:Connect(function()
+    if healthConnection then
+        healthConnection:Disconnect()
+        healthConnection = nil
+    end
+end)
         
 ----------------------------------- Weapon Spams
 WeaponSection1:NewSlider("Yoru Speed", "Increase/Decrease", 200, 1, function(s) -- 200 (MaxValue) | 0 (MinValue)
