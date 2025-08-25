@@ -24,7 +24,7 @@ local Tab9 = Window:NewTab("Misc")
 
 
 
-local MiscSection = Tab9:NewSection("God Mode")
+local godModeSection = Tab9:NewSection("God Mode")
 local SkillSection = Tab6:NewSection("Auto Skill Devil Fruit 1")
 local SkillSection2 = Tab6:NewSection("Auto SKill Devil Fruit 2")
 local HakiSection = Tab:NewSection("Haki Farming")
@@ -53,7 +53,7 @@ for i,v in pairs(game:GetService("Players"):GetChildren()) do
 table.insert(PLRS,v.Name)
 end
 
------------------------------------ God Mode
+----------------------------------- god Mode
 local godModeConnection = nil
 local godModeEnabled = false
 
@@ -88,7 +88,7 @@ local function disableGodMode()
     end
 end
 
-MiscSection:NewToggle("Enable God Mode", "no dame, God", function(state)
+godModeSection:NewToggle("Enable God Mode", "no dame, God", function(state)
     if state then
         enableGodMode()
     else
