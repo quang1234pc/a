@@ -24,6 +24,7 @@ local Tab9 = Window:NewTab("Misc")
 
 
 
+local GodModeSection = Tab9:NewSection("God Mode")
 local SkillSection = Tab6:NewSection("Auto Skill Devil Fruit 1")
 local SkillSection2 = Tab6:NewSection("Auto SKill Devil Fruit 2")
 local HakiSection = Tab:NewSection("Haki Farming")
@@ -52,6 +53,27 @@ for i,v in pairs(game:GetService("Players"):GetChildren()) do
 table.insert(PLRS,v.Name)
 end
 
+----------------------------------- God Mode
+GodModeSection:NewToggle("Enable God Mode", "no dame, god", function(state)
+    if state then
+        -- on God Mode
+        if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
+            local hum = game.Players.LocalPlayer.Character.Humanoid
+            hum:GetPropertyChangedSignal("Health"):Connect(function()
+                if hum.Health < hum.MaxHealth then
+                    hum.Health = hum.MaxHealth
+                end
+            end)
+            hum:SetStateEnabled(Enum.HumanoidStateType.Dead, false)
+        end
+    else
+        -- off God Mode
+        if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
+            local hum = game.Players.LocalPlayer.Character.Humanoid
+            hum:SetStateEnabled(Enum.HumanoidStateType.Dead, true)
+        end
+    end
+end)
 ----------------------------------- Weapon Spams
 WeaponSection1:NewSlider("Yoru Speed", "Increase/Decrease", 200, 1, function(s) -- 200 (MaxValue) | 0 (MinValue)
 Speed = s
