@@ -24,7 +24,7 @@ local Tab9 = Window:NewTab("Misc")
 
 
 
-local GodmodeSection = Tab9:NewSection("God Mode")
+local MiscSection = Tab9:NewSection("God Mode")
 local SkillSection = Tab6:NewSection("Auto Skill Devil Fruit 1")
 local SkillSection2 = Tab6:NewSection("Auto SKill Devil Fruit 2")
 local HakiSection = Tab:NewSection("Haki Farming")
@@ -54,7 +54,7 @@ table.insert(PLRS,v.Name)
 end
 
 ----------------------------------- God Mode
-GodmodeSection:NewToggle("Enable God Mode", "no dame, god", function(state)
+MiscSection:NewToggle("Enable God Mode", "no dame, god", function(state)
     if state then
         -- on God Mode
         if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
