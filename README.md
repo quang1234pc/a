@@ -54,26 +54,48 @@ table.insert(PLRS,v.Name)
 end
 
 ----------------------------------- God Mode
-MiscSection:NewToggle("Enable God Mode", "no dame, god", function(state)
-    if state then
-        -- on God Mode
-        if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
-            local hum = game.Players.LocalPlayer.Character.Humanoid
-            hum:GetPropertyChangedSignal("Health"):Connect(function()
-                if hum.Health < hum.MaxHealth then
-                    hum.Health = hum.MaxHealth
-                end
-            end)
-            hum:SetStateEnabled(Enum.HumanoidStateType.Dead, false)
+local godModeConnection = nil
+local godModeEnabled = false
+
+local function enableGodMode()
+    local char = game.Players.LocalPlayer.Character
+    if char and char:FindFirstChild("Humanoid") then
+        local hum = char.Humanoid
+        if godModeConnection then
+            godModeConnection:Disconnect()
+            godModeConnection = nil
         end
-    else
-        -- off God Mode
-        if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
-            local hum = game.Players.LocalPlayer.Character.Humanoid
-            hum:SetStateEnabled(Enum.HumanoidStateType.Dead, true)
-        end
+        godModeConnection = hum:GetPropertyChangedSignal("Health"):Connect(function()
+            if hum.Health < hum.MaxHealth then
+                hum.Health = hum.MaxHealth
+            end
+        end)
+        hum:SetStateEnabled(Enum.HumanoidStateType.Dead, false)
+        godModeEnabled = true
     end
-end)
+end
+
+local function disableGodMode()
+    local char = game.Players.LocalPlayer.Character
+    if char and char:FindFirstChild("Humanoid") then
+        local hum = char.Humanoid
+        if godModeConnection then
+            godModeConnection:Disconnect()
+            godModeConnection = nil
+        end
+        hum:SetStateEnabled(Enum.HumanoidStateType.Dead, true)
+        godModeEnabled = false
+    end
+end
+
+MiscSection:NewToggle("Enable God Mode", "no dame, God", function(state)
+    if state then
+        enableGodMode()
+    else
+        disableGodMode()
+    end
+end)    
+        
 ----------------------------------- Weapon Spams
 WeaponSection1:NewSlider("Yoru Speed", "Increase/Decrease", 200, 1, function(s) -- 200 (MaxValue) | 0 (MinValue)
 Speed = s
