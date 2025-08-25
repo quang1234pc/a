@@ -63,7 +63,6 @@ MiscSection:NewToggle("God Mode", "", function(state)
        local Humanoid = Character and Character:FindFirstChild("Humanoid")
         local GodModeEnabled = false
 
--- Hàm kích hoạt God Mode
 function EnableGodMode()
     if Humanoid then
         Humanoid.MaxHealth = math.huge
@@ -76,7 +75,6 @@ function EnableGodMode()
     end
 end
 
--- Hàm tắt God Mode
 function DisableGodMode()
     if Humanoid then
         Humanoid.MaxHealth = 100
@@ -84,7 +82,6 @@ function DisableGodMode()
     end
 end
 
--- Xử lý khi nhân vật respawn
 LocalPlayer.CharacterAdded:Connect(function(newCharacter)
     Character = newCharacter
     Humanoid = newCharacter:WaitForChild("Humanoid")
