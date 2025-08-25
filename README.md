@@ -74,12 +74,6 @@ function EnableGodMode()
         end)
     end
 end
-function DisableGodMode()
-    if Humanoid then
-        Humanoid.MaxHealth = 100
-        Humanoid.Health = 100
-    end
-end
 ----------------------------------- Weapon Spams
 WeaponSection1:NewSlider("Yoru Speed", "Increase/Decrease", 200, 1, function(s) -- 200 (MaxValue) | 0 (MinValue)
 Speed = s
