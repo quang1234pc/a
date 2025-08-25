@@ -54,7 +54,7 @@ table.insert(PLRS,v.Name)
 end
 
 ----------------------------------- God Mode
-GodModeSection:NewToggle("Enable God Mode", "no dame, god", function(state)
+MiscSection:NewToggle("Enable God Mode", "no dame, god", function(state)
     if state then
         -- on God Mode
         if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
