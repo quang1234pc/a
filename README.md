@@ -54,14 +54,14 @@ table.insert(PLRS,v.Name)
 end
 
 ----------------------------------- God Mode
-godModeSection:NewToggle("God Mode", "", function(state)
-    GodModeEnabled = state
-    if state then
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-local Character = LocalPlayer.Character
-local Humanoid = Character and Character:FindFirstChild("Humanoid")
-local GodModeEnabled = false
+GodModeSection:NewToggle("God Mode", "", function(state)
+GodModeEnabled = state
+if state then
+    local Players = game:GetService("Players")
+    local LocalPlayer = Players.LocalPlayer
+    local Character = LocalPlayer.Character
+    local Humanoid = Character and Character:FindFirstChild("Humanoid")
+        local GodModeEnabled = false
 
 -- Hàm kích hoạt God Mode
 function EnableGodMode()
