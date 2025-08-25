@@ -54,7 +54,7 @@ table.insert(PLRS,v.Name)
 end
 
 ----------------------------------- God Mode
-MiscSection:NewToggle("God Mode", "", function(state)
+MiscSection:NewToggle("God Mode", function(state)
    GodModeEnabled = state
    if state then
       local Players = game:GetService("Players")
