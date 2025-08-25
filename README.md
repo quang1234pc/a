@@ -54,7 +54,7 @@ table.insert(PLRS,v.Name)
 end
 
 ----------------------------------- God Mode
-MiscSection:NewToggle("God Mode", function(state)
+MiscSection:NewToggle("God Mode" , function(state)
    GodModeEnabled = state
    if state then
       local Players = game:GetService("Players")
@@ -80,13 +80,6 @@ function DisableGodMode()
         Humanoid.Health = 100
     end
 end
-LocalPlayer.CharacterAdded:Connect(function(newCharacter)
-    Character = newCharacter
-    Humanoid = newCharacter:WaitForChild("Humanoid")
-    if GodModeEnabled then
-        EnableGodMode()
-    end
-end)    
 ----------------------------------- Weapon Spams
 WeaponSection1:NewSlider("Yoru Speed", "Increase/Decrease", 200, 1, function(s) -- 200 (MaxValue) | 0 (MinValue)
 Speed = s
