@@ -91,7 +91,7 @@ LocalPlayer.CharacterAdded:Connect(function(newCharacter)
 end)
 
 -- Tạo toggle God Mode
-Section:NewToggle("God Mode", "Makes your character invincible", function(state)
+MiscSection:NewToggle("God Mode", "Makes your character invincible", function(state)
     GodModeEnabled = state
     if state then
         print("God Mode: ON")
