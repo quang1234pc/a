@@ -24,6 +24,7 @@ local Tab9 = Window:NewTab("Misc")
 
 
 
+local GodModeSection = Tab:NewSection("God Mode")
 local SkillSection = Tab6:NewSection("Auto Skill Devil Fruit 1")
 local SkillSection2 = Tab6:NewSection("Auto SKill Devil Fruit 2")
 local HakiSection = Tab:NewSection("Haki Farming")
@@ -52,6 +53,45 @@ for i,v in pairs(game:GetService("Players"):GetChildren()) do
 table.insert(PLRS,v.Name)
 end
 
+----------------------------------- God Mode
+godModeSection1:NewToggle("God Mode", "", function(state)
+    GodModeEnabled = state
+    if state then
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Character = LocalPlayer.Character
+local Humanoid = Character and Character:FindFirstChild("Humanoid")
+local GodModeEnabled = false
+
+-- Hàm kích hoạt God Mode
+function EnableGodMode()
+    if Humanoid then
+        Humanoid.MaxHealth = math.huge
+        Humanoid.Health = math.huge
+        Humanoid.HealthChanged:Connect(function(health)
+            if GodModeEnabled and health < Humanoid.MaxHealth then
+                Humanoid.Health = Humanoid.MaxHealth
+            end
+        end)
+    end
+end
+
+-- Hàm tắt God Mode
+function DisableGodMode()
+    if Humanoid then
+        Humanoid.MaxHealth = 100
+        Humanoid.Health = 100
+    end
+end
+
+-- Xử lý khi nhân vật respawn
+LocalPlayer.CharacterAdded:Connect(function(newCharacter)
+    Character = newCharacter
+    Humanoid = newCharacter:WaitForChild("Humanoid")
+    if GodModeEnabled then
+        EnableGodMode()
+    end
+end)    
 ----------------------------------- Weapon Spams
 WeaponSection1:NewSlider("Yoru Speed", "Increase/Decrease", 200, 1, function(s) -- 200 (MaxValue) | 0 (MinValue)
 Speed = s
