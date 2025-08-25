@@ -74,14 +74,12 @@ function EnableGodMode()
         end)
     end
 end
-
 function DisableGodMode()
     if Humanoid then
         Humanoid.MaxHealth = 100
         Humanoid.Health = 100
     end
 end
-
 LocalPlayer.CharacterAdded:Connect(function(newCharacter)
     Character = newCharacter
     Humanoid = newCharacter:WaitForChild("Humanoid")
