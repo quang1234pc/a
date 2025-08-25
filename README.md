@@ -55,10 +55,6 @@ end
 
 ----------------------------------- God Mode
 
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-local Character = LocalPlayer.Character
-local Humanoid = Character and Character:FindFirstChild("Humanoid")
 local GodModeEnabled = false
 
 -- Hàm kích hoạt God Mode
