@@ -40,6 +40,7 @@ local KPSection = Tab3:NewSection("Players")
 local KPSection2 = Tab3:NewSection("Quake Fruit")
 local KPSection3 = Tab3:NewSection("Light Fruit")
 local MiscSection = Tab9:NewSection("Random Stuff")
+local MiscSection = Tab9:NewSection("God Mode")
 local WeaponSection1 = Tab4:NewSection("Yoru")
 local WeaponSection2 = Tab4:NewSection("Seastone Cestus")
 local TPSection2 = Tab2:NewSection("Server")
@@ -52,6 +53,25 @@ for i,v in pairs(game:GetService("Players"):GetChildren()) do
 table.insert(PLRS,v.Name)
 end
 
+----------------------------------- God Mode
+MiscSection:NewToggle("God Mode (indefinite)", "Toggle god mode on/off", function(state)
+    if state then
+        _G.AdminGod.requestGod("enable", 0)
+    else
+        _G.AdminGod.requestGod("disable")
+    end
+end)
+
+Section:NewButton("1 hour God Mode", "Enable god mode for 1 hour", function()
+    _G.AdminGod.requestGod("enable", 60*60)
+end)
+
+Section:NewTextBox("Seconds","3600", true, function(text)
+    local n = tonumber(text)
+    if n and n > 0 then
+        _G.AdminGod.requestGod("enable", n)
+    end
+end)
 ----------------------------------- Weapon Spams
 WeaponSection1:NewSlider("Yoru Speed", "Increase/Decrease", 200, 1, function(s) -- 200 (MaxValue) | 0 (MinValue)
 Speed = s
