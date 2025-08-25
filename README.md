@@ -24,7 +24,7 @@ local Tab9 = Window:NewTab("Misc")
 
 
 
-local GodModeSection = Tab9:NewSection("God Mode")
+local MiscSection = Tab9:NewSection("God Mode")
 local SkillSection = Tab6:NewSection("Auto Skill Devil Fruit 1")
 local SkillSection2 = Tab6:NewSection("Auto SKill Devil Fruit 2")
 local HakiSection = Tab:NewSection("Haki Farming")
