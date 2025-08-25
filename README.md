@@ -57,23 +57,6 @@ end
 MiscSection:NewToggle("God Mode" , function(state)
    GodModeEnabled = state
    if state then
-      local Players = game:GetService("Players")
-       local LocalPlayer = Players.LocalPlayer
-       local Character = LocalPlayer.Character
-       local Humanoid = Character and Character:FindFirstChild("Humanoid")
-        local GodModeEnabled = false
-
-function EnableGodMode()
-    if Humanoid then
-        Humanoid.MaxHealth = math.huge
-        Humanoid.Health = math.huge
-        Humanoid.HealthChanged:Connect(function(health)
-            if GodModeEnabled and health < Humanoid.MaxHealth then
-                Humanoid.Health = Humanoid.MaxHealth
-            end
-        end)
-    end
-end
 ----------------------------------- Weapon Spams
 WeaponSection1:NewSlider("Yoru Speed", "Increase/Decrease", 200, 1, function(s) -- 200 (MaxValue) | 0 (MinValue)
 Speed = s
