@@ -24,7 +24,7 @@ local Tab9 = Window:NewTab("Misc")
 
 
 
-local GodSection = Tab:NewSection("God Mode")
+local MiscSection = Tab9:NewSection("God Mode")
 local SkillSection = Tab6:NewSection("Auto Skill Devil Fruit 1")
 local SkillSection2 = Tab6:NewSection("Auto SKill Devil Fruit 2")
 local HakiSection = Tab:NewSection("Haki Farming")
@@ -54,7 +54,7 @@ table.insert(PLRS,v.Name)
 end
 
 ----------------------------------- God Mode
-GodSection:NewToggle("God Mode", "", function(state)
+MiscSection:NewToggle("God Mode", "", function(state)
    GodModeEnabled = state
    if state then
       local Players = game:GetService("Players")
