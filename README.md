@@ -769,7 +769,8 @@ game:GetService('RunService').RenderStepped:connect(function()
             workspace:WaitForChild("UserData"):WaitForChild("User_" .. game.Players.LocalPlayer.UserId):WaitForChild("III"):FireServer(unpack(args))
         end
     end
-end)    
+end)
+
 ----------------------------------- Teleports
 TPSection:NewDropdown("Island Teleports", "Teleports you to chosen island", {"Windmill", "Race Track" , "Bar" ,"Cave", "Marine Fort" ,"Sam", "Krizma", "Cannon Dealer Island" , "Expertise", "Mansion" , "Trees Island" , "Dead Mountain", "Pyramid", "Snow Mountain", "Little Snow Island", "Vokun", "Kaizu", "Purple", "Pursuer", "Safe Place"}, function(currentOption)
 if currentOption == "Expertise" then
